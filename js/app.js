@@ -1,4 +1,4 @@
-let defaultPlayer = '';
+let defaultPlayer = 'images/char-boy.png';
 
 // Enemies our player must avoid
 let Enemy = function(x, y) {
@@ -21,14 +21,17 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x = this.x + 100 * dt * this.multiplier;
     if (this.x > 505) {
-        console.log("Reset Enemies");
         this.reset();
+    }
+    if (this.y === player.y && (this.x > player.x - 53 && this.x < player.x + 53)) {
+        player.reset();
+        console.log("Collision detected");
     }
 };
 
 Enemy.prototype.reset = function() {
     this.x = -100;
-    let enemySpawnY = [220, 140, 50];
+    let enemySpawnY = [207, 124, 41];
     this.y = enemySpawnY[Math.floor((Math.random() * 3))];
     this.multiplier = Math.floor((Math.random() * 5) + 1);
 }
@@ -46,7 +49,7 @@ Enemy.prototype.render = function() {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [];
-let enemySpawn = [220, 140, 60];
+let enemySpawn = [207, 124, 41];
 for (let i = 0; i < 4; i++) {
     let enemySpawnX = -100;
     let enemySpawnY = enemySpawn[Math.floor(Math.random() * 3)];
@@ -55,7 +58,7 @@ for (let i = 0; i < 4; i++) {
 }
 
 let Player = function(x, y) {
-    this.sprite = 'images/char-boy.png';
+    this.sprite = defaultPlayer;
     this.x = x;
     this.y = y;
 }
@@ -66,6 +69,11 @@ Player.prototype.update = function() {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Player.prototype.reset = function() {
+    this.x = 200;
+    this.y = 373;
 };
 
 Player.prototype.handleInput = function(direction) {
@@ -81,6 +89,7 @@ Player.prototype.handleInput = function(direction) {
     else if (direction === 'right') {
         this.x = this.x + 100;
     }
+    console.log(`Player: x = ${this.x} y = ${this.y}`);
 };
 let player = new Player(200, 373);
 
