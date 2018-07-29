@@ -1,5 +1,7 @@
+let defaultPlayer = '';
+
 // Enemies our player must avoid
-var Enemy = function(x, y) {
+let Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -36,12 +38,26 @@ Enemy.prototype.render = function() {
 let allEnemies = [];
 let enemySpawn = [220, 140, 60];
 for (let i = 0; i < 4; i++) {
-    let enemySpawnX = 0;
+    let enemySpawnX = -100;
     let enemySpawnY = enemySpawn[Math.floor(Math.random() * 3)];
     const enemy = new Enemy(enemySpawnX, enemySpawnY);
     allEnemies.push(enemy);
 }
 
+let Player = function(x, y) {
+    this.sprite = 'images/char-boy.png';
+    this.x = x;
+    this.y = y;
+}
+Player.prototype.update = function() {
+    this.x = this.x;
+    this.y = this.y;
+};
+
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+let player = new Player(200, 373);
 
 
 // This listens for key presses and sends the keys to your
