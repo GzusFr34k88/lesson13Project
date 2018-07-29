@@ -66,13 +66,29 @@ Player.prototype.update = function() {
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
+
+Player.prototype.handleInput = function(direction) {
+    if (direction === 'up') {
+        this.y = this.y - 83;
+    }
+    else if (direction === 'down') {
+        this.y = this.y + 83;
+    }
+    else if (direction === 'left') {
+        this.x = this.x -100;
+    }
+    else if (direction === 'right') {
+        this.x = this.x + 100;
+    }
+};
 let player = new Player(200, 373);
 
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
+    e.preventDefault();
     var allowedKeys = {
         37: 'left',
         38: 'up',
