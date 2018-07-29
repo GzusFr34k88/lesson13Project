@@ -20,8 +20,18 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x = this.x + 100 * dt * this.multiplier;
+    if (this.x > 505) {
+        console.log("Reset Enemies");
+        this.reset();
+    }
 };
 
+Enemy.prototype.reset = function() {
+    this.x = -100;
+    let enemySpawnY = [220, 140, 50];
+    this.y = enemySpawnY[Math.floor((Math.random() * 3))];
+    this.multiplier = Math.floor((Math.random() * 5) + 1);
+}
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
