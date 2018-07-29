@@ -25,7 +25,6 @@ Enemy.prototype.update = function(dt) {
     }
     if (this.y === player.y && (this.x > player.x - 53 && this.x < player.x + 53)) {
         player.reset();
-        console.log("Collision detected");
     }
 };
 
@@ -65,6 +64,9 @@ let Player = function(x, y) {
 Player.prototype.update = function() {
     this.x = this.x;
     this.y = this.y;
+    if (this.y === -42) {
+        this.reset();
+    }
 };
 
 Player.prototype.render = function() {
@@ -77,16 +79,16 @@ Player.prototype.reset = function() {
 };
 
 Player.prototype.handleInput = function(direction) {
-    if (direction === 'up') {
+    if (direction === 'up' && this.y !== -42) {
         this.y = this.y - 83;
     }
-    else if (direction === 'down') {
+    else if (direction === 'down' && this.y !== 373) {
         this.y = this.y + 83;
     }
-    else if (direction === 'left') {
+    else if (direction === 'left' && this.x !== 0) {
         this.x = this.x -100;
     }
-    else if (direction === 'right') {
+    else if (direction === 'right' && this.x !== 400) {
         this.x = this.x + 100;
     }
     console.log(`Player: x = ${this.x} y = ${this.y}`);
