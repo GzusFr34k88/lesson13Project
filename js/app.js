@@ -60,7 +60,8 @@ let Player = function(x, y) {
     this.sprite = defaultPlayer;
     this.x = x;
     this.y = y;
-}
+};
+
 Player.prototype.update = function() {
     this.x = this.x;
     this.y = this.y;
@@ -95,6 +96,45 @@ Player.prototype.handleInput = function(direction) {
 };
 let player = new Player(200, 373);
 
+let OrangeGem = function(x, y) {
+    this.sprite = 'images/Gem-Orange.png';
+    this.x = x;
+    this.y = y;
+};
+
+OrangeGem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+let GreenGem = function(x, y) {
+    this.sprite = 'images/Gem-Green.png';
+    this.x = x;
+    this.y = y;
+};
+
+GreenGem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+let BlueGem = function(x, y) {
+    this.sprite = 'images/Gem-Blue.png';
+    this.x = x;
+    this.y = y;
+};
+
+BlueGem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y,);
+}
+
+const orangeSpawnX = [0, 100, 200, 300, 400];
+const orangeSpawnY = 41;
+const greenSpawnX = [0, 100, 200, 300, 400];
+const greenSpawnY = 124;
+const blueSpawnX = [0, 100, 200, 300, 400];
+const blueSpawnY = 207;
+let orangeGem = new OrangeGem(orangeSpawnX[Math.floor(Math.random() * 5)], orangeSpawnY);
+let greenGem = new GreenGem(greenSpawnX[Math.floor(Math.random() * 5)], greenSpawnY);
+let blueGem = new BlueGem(blueSpawnX[Math.floor(Math.random() * 5)], blueSpawnY);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
