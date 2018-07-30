@@ -68,6 +68,15 @@ Player.prototype.update = function() {
     if (this.y === -42) {
         this.reset();
     }
+    if (this.y === blueGem.y && this.x === blueGem.x){
+        blueGem.reset();
+    }
+    if (this.y === greenGem.y && this.x === greenGem.x) {
+        greenGem.reset();
+    }
+    if (this.y === orangeGem.y && this.x === orangeGem.x) {
+        orangeGem.reset();
+    }
 };
 
 Player.prototype.render = function() {
@@ -104,7 +113,12 @@ let OrangeGem = function(x, y) {
 
 OrangeGem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
+
+OrangeGem.prototype.reset = function () {
+    this.x = orangeSpawnX[Math.floor(Math.random() * 5)];
+    this.y = orangeSpawnY;
+};
 
 let GreenGem = function(x, y) {
     this.sprite = 'images/Gem-Green.png';
@@ -114,17 +128,28 @@ let GreenGem = function(x, y) {
 
 GreenGem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
+
+GreenGem.prototype.reset = function () {
+    this.x = greenSpawnX[Math.floor(Math.random() * 5)];
+    this.y = greenSpawnY;
+};
 
 let BlueGem = function(x, y) {
     this.sprite = 'images/Gem-Blue.png';
     this.x = x;
     this.y = y;
+    console.log(`BlueGem x: ${this.x} y: ${this.y}`);
 };
 
 BlueGem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y,);
-}
+};
+
+BlueGem.prototype.reset = function() {
+    this.x = blueSpawnX[Math.floor(Math.random() * 5)];
+    this.y = blueSpawnY;
+};
 
 const orangeSpawnX = [0, 100, 200, 300, 400];
 const orangeSpawnY = 41;
@@ -135,7 +160,6 @@ const blueSpawnY = 207;
 let orangeGem = new OrangeGem(orangeSpawnX[Math.floor(Math.random() * 5)], orangeSpawnY);
 let greenGem = new GreenGem(greenSpawnX[Math.floor(Math.random() * 5)], greenSpawnY);
 let blueGem = new BlueGem(blueSpawnX[Math.floor(Math.random() * 5)], blueSpawnY);
-
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
