@@ -85,6 +85,17 @@ Player.prototype.update = function() {
         orangeGem.reset();
         points += 100;
     }
+    if(lives === 0) {
+        orangeGem.reset();
+        greenGem.reset();
+        blueGem.reset();
+        heart1.reset(5, 35);
+        heart2.reset(55, 35);
+        heart3.reset(105, 35);
+        heart4.reset(155, 35);
+        heart5.reset(205, 35);
+        score.reset();
+    }
 };
 
 //Implement score system
@@ -124,9 +135,15 @@ Lives.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-Lives.prototype.reset = function() {
+Lives.prototype.loss = function() {
     this.x = -100;
     this.y = -100;
+};
+
+Lives.prototype.reset = function(x, y) {
+    lives = 5;
+    this.x = x;
+    this.y = y;
 };
 
 let heart1 = new Lives(5, 35);
@@ -139,24 +156,44 @@ function lossOfLife() {
     lives -= 1;
     points -= 100;
     if (lives === 4) {
-        heart5.reset();
+        heart5.loss();
     }
     if (lives === 3) {
-        heart4.reset();
+        heart4.loss();
     }
     if (lives === 2) {
-        heart3.reset();
+        heart3.loss();
     }
     if (lives === 1) {
-        heart2.reset();
+        heart2.loss();
     }
     if (lives === 0) {
-        heart1.reset();
+        heart1.loss();
     }
 }
-/* ctx.font = '30px Coda';
-ctx.fillStyle = 'white';
-ctx.fillText(`Score: ${points}`, 450, 35); */
+
+let Score = function(x, y) {
+    this.x = x;
+    this.y = y;
+};
+
+Score.prototype.render = function() {
+    ctx.font = '30px Coda';
+    ctx.fillStyle = 'white';
+    ctx.fillText(`Score: ${points}`, this.x, this.y);
+};
+
+Score.prototype.update = function() {
+    ctx.font = '30px Coda';
+    ctx.fillStyle = 'white';
+    ctx.fillText(`Score: ${points}`, this.x, this.y);
+};
+
+Score.prototype.reset = function() {
+    points = 0;
+};
+
+let score = new Score(300, 88);
 
 let OrangeGem = function(x, y) {
     this.sprite = 'images/Gem-Orange.png';
