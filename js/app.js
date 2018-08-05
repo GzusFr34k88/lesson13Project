@@ -1,4 +1,7 @@
-let defaultPlayer = 'images/char-boy.png';
+const defaultPlayer = 'images/char-boy.png';
+let points = 0;
+let lives = 5;
+
 
 // Enemies our player must avoid
 let Enemy = function(x, y) {
@@ -25,6 +28,7 @@ Enemy.prototype.update = function(dt) {
     }
     if (this.y === player.y && (this.x > player.x - 53 && this.x < player.x + 53)) {
         player.reset();
+        lossOfLife();
     }
 };
 
@@ -66,18 +70,24 @@ Player.prototype.update = function() {
     this.x = this.x;
     this.y = this.y;
     if (this.y === -42) {
+        lossOfLife();
         this.reset();
     }
     if (this.y === blueGem.y && this.x === blueGem.x){
         blueGem.reset();
+        points += 25;
     }
     if (this.y === greenGem.y && this.x === greenGem.x) {
         greenGem.reset();
+        points += 50;
     }
     if (this.y === orangeGem.y && this.x === orangeGem.x) {
         orangeGem.reset();
+        points += 100;
     }
 };
+
+//Implement score system
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -101,9 +111,52 @@ Player.prototype.handleInput = function(direction) {
     else if (direction === 'right' && this.x !== 400) {
         this.x = this.x + 100;
     }
-    console.log(`Player: x = ${this.x} y = ${this.y}`);
 };
 let player = new Player(200, 373);
+
+let Lives = function(x, y) {
+    this.x = x;
+    this.y = y;
+    this.sprite = 'images/smallHeart.png';
+};
+
+Lives.prototype.render = function () {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+Lives.prototype.reset = function() {
+    this.x = -100;
+    this.y = -100;
+};
+
+let heart1 = new Lives(5, 35);
+let heart2 = new Lives(55, 35);
+let heart3 = new Lives(105, 35);
+let heart4 = new Lives(155, 35);
+let heart5 = new Lives(205, 35);
+
+function lossOfLife() {
+    lives -= 1;
+    points -= 100;
+    if (lives === 4) {
+        heart5.reset();
+    }
+    if (lives === 3) {
+        heart4.reset();
+    }
+    if (lives === 2) {
+        heart3.reset();
+    }
+    if (lives === 1) {
+        heart2.reset();
+    }
+    if (lives === 0) {
+        heart1.reset();
+    }
+}
+/* ctx.font = '30px Coda';
+ctx.fillStyle = 'white';
+ctx.fillText(`Score: ${points}`, 450, 35); */
 
 let OrangeGem = function(x, y) {
     this.sprite = 'images/Gem-Orange.png';
@@ -139,7 +192,6 @@ let BlueGem = function(x, y) {
     this.sprite = 'images/Gem-Blue.png';
     this.x = x;
     this.y = y;
-    console.log(`BlueGem x: ${this.x} y: ${this.y}`);
 };
 
 BlueGem.prototype.render = function() {
@@ -173,3 +225,6 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+/* Create tap areas for mobile play
+Add modle at start highlighting tap areas
+Add instructions to modle */

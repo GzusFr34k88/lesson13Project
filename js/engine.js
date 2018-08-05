@@ -119,7 +119,7 @@ var Engine = (function(global) {
             row, col;
         
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ctx.clearRect(0,0,canvas.width,canvas.height);
 
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
@@ -152,6 +152,11 @@ var Engine = (function(global) {
         orangeGem.render();
         greenGem.render();
         blueGem.render();
+        heart1.render();
+        heart2.render();
+        heart3.render();
+        heart4.render();
+        heart5.render();
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
@@ -179,7 +184,8 @@ var Engine = (function(global) {
         'images/char-boy.png',
         'images/Gem-Orange.png',
         'images/Gem-Green.png',
-        'images/Gem-Blue.png'
+        'images/Gem-Blue.png',
+        'images/smallHeart.png'
     ]);
     Resources.onReady(init);
 
