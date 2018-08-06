@@ -1,4 +1,7 @@
 const defaultPlayer = 'images/char-boy.png';
+const endModal = document.querySelector('.endModal');
+const endModalBody = document.querySelector('.end-modal-body');
+const tryAgainBtn = document.querySelector('.tryAgainBtn');
 let points = 0;
 let lives = 5;
 
@@ -86,15 +89,7 @@ Player.prototype.update = function() {
         points += 100;
     }
     if(lives === 0) {
-        orangeGem.reset();
-        greenGem.reset();
-        blueGem.reset();
-        heart1.reset(5, 35);
-        heart2.reset(55, 35);
-        heart3.reset(105, 35);
-        heart4.reset(155, 35);
-        heart5.reset(205, 35);
-        score.reset();
+        endGame();
     }
 };
 
@@ -193,7 +188,7 @@ Score.prototype.reset = function() {
     points = 0;
 };
 
-let score = new Score(300, 88);
+let score = new Score(325, 86);
 
 let OrangeGem = function(x, y) {
     this.sprite = 'images/Gem-Orange.png';
@@ -249,19 +244,62 @@ const blueSpawnY = 207;
 let orangeGem = new OrangeGem(orangeSpawnX[Math.floor(Math.random() * 5)], orangeSpawnY);
 let greenGem = new GreenGem(greenSpawnX[Math.floor(Math.random() * 5)], greenSpawnY);
 let blueGem = new BlueGem(blueSpawnX[Math.floor(Math.random() * 5)], blueSpawnY);
+
+function endGame() {
+    endOfGame = true;
+    lives = 5;
+    endModal.style.display = "block";
+    const temp = document.createDocumentFragment();
+    const modalScore = document.createElement('p');
+    modalScore.className = 'modalScore';
+    modalScore.textContent = `You scored: ${points} points`;
+    temp.appendChild(modalScore);
+    endModalBody.appendChild(temp);
+    tryAgainBtn.addEventListener('click', function() {
+        endOfGame = false;
+        endModal.style.display = "none";
+        orangeGem.reset();
+        greenGem.reset();
+        blueGem.reset();
+        heart1.reset(5, 35);
+        heart2.reset(55, 35);
+        heart3.reset(105, 35);
+        heart4.reset(155, 35);
+        heart5.reset(205, 35);
+        score.reset();
+        while (endModalBody.firstChild) {
+            endModalBody.removeChild(endModalBody.firstChild);
+        }
+    });
+    
+        //Add modle that displays score
+}
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
+let endOfGame = false;
 document.addEventListener('keyup', function(e) {
     e.preventDefault();
-    var allowedKeys = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
-    };
+    if (!endOfGame) {
+        var allowedKeys = {
+            37: 'left',
+            38: 'up',
+            39: 'right',
+            40: 'down'
+        };
+    }
+    else {
+        allowedKeys = {
+            37: 'none',
+            38: 'none',
+            39: 'none',
+            40: 'none'
+        };
+    }
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
 /* Create tap areas for mobile play
 Add modle at start highlighting tap areas
-Add instructions to modle */
+Add instructions to modle 
+Add "choose character" feature*/
