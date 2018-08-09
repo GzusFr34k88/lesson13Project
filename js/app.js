@@ -1,7 +1,9 @@
 const defaultPlayer = 'images/char-boy.png';
+const startModal = document.querySelector('.startModal');
 const endModal = document.querySelector('.endModal');
 const endModalBody = document.querySelector('.end-modal-body');
 const tryAgainBtn = document.querySelector('.tryAgainBtn');
+const startBtn = document.querySelector('.startBtn');
 let points = 0;
 let lives = 5;
 
@@ -246,7 +248,7 @@ let greenGem = new GreenGem(greenSpawnX[Math.floor(Math.random() * 5)], greenSpa
 let blueGem = new BlueGem(blueSpawnX[Math.floor(Math.random() * 5)], blueSpawnY);
 
 function endGame() {
-    endOfGame = true;
+    endStartOfGame = true;
     lives = 5;
     endModal.style.display = "block";
     const temp = document.createDocumentFragment();
@@ -256,7 +258,7 @@ function endGame() {
     temp.appendChild(modalScore);
     endModalBody.appendChild(temp);
     tryAgainBtn.addEventListener('click', function() {
-        endOfGame = false;
+        endStartOfGame = false;
         endModal.style.display = "none";
         orangeGem.reset();
         greenGem.reset();
@@ -273,12 +275,22 @@ function endGame() {
     });
 }
 
+startBtn.addEventListener('click', function() {
+    startModal.style.display = "none";
+    endStartOfGame = false;
+    detectswipe(directionalControl);
+});
+
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-let endOfGame = false;
+let endStartOfGame = true;
+document.addEventListener('keydown', function(e){
+    e.preventDefault();
+});
 document.addEventListener('keyup', function(e) {
     e.preventDefault();
-    if (!endOfGame) {
+    if (!endStartOfGame) {
         var allowedKeys = {
             37: 'left',
             38: 'up',
@@ -300,49 +312,50 @@ document.addEventListener('keyup', function(e) {
 
 //Swipe detection provided by escapenetscape https://stackoverflow.com/users/2689455/escapenetscape
 function detectswipe(func) {
-    swipe_det = new Object();
-    swipe_det.sX = 0; swipe_det.sY = 0; swipe_det.eX = 0; swipe_det.eY = 0;
-    var min_x = 30;  //min x swipe for horizontal swipe
-    var max_x = 30;  //max x difference for vertical swipe
-    var min_y = 50;  //min y swipe for vertical swipe
-    var max_y = 60;  //max y difference for horizontal swipe
-    var direc = "";
-    ele = document;
-    ele.addEventListener('touchstart', function (e) {
-        var t = e.touches[0];
-        swipe_det.sX = t.screenX;
-        swipe_det.sY = t.screenY;
-    }, false);
-    ele.addEventListener('touchmove', function (e) {
-        var t = e.touches[0];
-        swipe_det.eX = t.screenX;
-        swipe_det.eY = t.screenY;
-    }, false);
-    ele.addEventListener('touchend', function (e) {
-        //horizontal detection
-        if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y) && (swipe_det.eX > 0)))) {
-            if (swipe_det.eX > swipe_det.sX) direc = "right";
-            else direc = "left";
-        }
-        //vertical detection
-        else if ((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x) && (swipe_det.eY > 0)))) {
-            if (swipe_det.eY > swipe_det.sY) direc = "down";
-            else direc = "up";
-        }
-
-        if (direc !== "") {
-            if (typeof func === 'function') func(direc);
-        }
-        direc = "";
+    console.log(endStartOfGame);
+    if (!endStartOfGame) {
+        swipe_det = new Object();
         swipe_det.sX = 0; swipe_det.sY = 0; swipe_det.eX = 0; swipe_det.eY = 0;
-    }, false);
+        var min_x = 30;  //min x swipe for horizontal swipe
+        var max_x = 30;  //max x difference for vertical swipe
+        var min_y = 50;  //min y swipe for vertical swipe
+        var max_y = 60;  //max y difference for horizontal swipe
+        var direc = "";
+        ele = document;
+        ele.addEventListener('touchstart', function (e) {
+            var t = e.touches[0];
+            swipe_det.sX = t.screenX;
+            swipe_det.sY = t.screenY;
+        }, false);
+        ele.addEventListener('touchmove', function (e) {
+            var t = e.touches[0];
+            swipe_det.eX = t.screenX;
+            swipe_det.eY = t.screenY;
+        }, false);
+        ele.addEventListener('touchend', function (e) {
+            //horizontal detection
+            if ((((swipe_det.eX - min_x > swipe_det.sX) || (swipe_det.eX + min_x < swipe_det.sX)) && ((swipe_det.eY < swipe_det.sY + max_y) && (swipe_det.sY > swipe_det.eY - max_y) && (swipe_det.eX > 0)))) {
+                if (swipe_det.eX > swipe_det.sX) direc = "right";
+                else direc = "left";
+            }
+            //vertical detection
+            else if ((((swipe_det.eY - min_y > swipe_det.sY) || (swipe_det.eY + min_y < swipe_det.sY)) && ((swipe_det.eX < swipe_det.sX + max_x) && (swipe_det.sX > swipe_det.eX - max_x) && (swipe_det.eY > 0)))) {
+                if (swipe_det.eY > swipe_det.sY) direc = "down";
+                else direc = "up";
+            }
+    
+            if (direc !== "") {
+                if (typeof func === 'function') func(direc);
+            }
+            direc = "";
+            swipe_det.sX = 0; swipe_det.sY = 0; swipe_det.eX = 0; swipe_det.eY = 0;
+        }, false);
+    }
 }
 
 function directionalControl(d) {
     player.handleInput(d);
 }
 
-detectswipe(directionalControl);
-/* Create swipe for mobile play
-Add instructions to modal
+/* Add instructions to modal
 Add "choose character" feature*/

@@ -1,6 +1,7 @@
 body {
     text-align: center;
     font-family: "Coda", cursive;
+    position: fixed;
 }
 
 canvas {
@@ -67,4 +68,96 @@ canvas {
     to {
         opacity: 1;
     }
+}
+.startModal {
+    display: flex;
+    flex-wrap: wrap;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.start-modal-content {
+    background: linear-gradient(160deg, #00ff00 0%, #0000ff 100%);
+    margin: 5% auto;
+    width: 75%;
+    height: 75%;
+    max-height: 500px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 7px 20px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 35px;
+    animation-name: endModalOpen;
+    animation-duration: 0.8s;
+}
+
+.start-modal-header h2 {
+    margin: 0;
+    text-align: center;
+    color: aliceblue;
+}
+
+.start-header {
+    padding: 15px;
+    width: 100%;
+    height: 25%;
+}
+
+.start-modal-body {
+    text-align: center;
+    margin: 0 auto;
+    justify-content: center;
+    color: white;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mobileContainer {
+    margin: 0 auto;
+    width: 46%;
+    height: 25%;
+    border: 2px dashed white;
+}
+
+.computerContainer {
+    margin: 0 auto;
+    width: 46%;
+    height: 25%;
+    border: 2px dashed white;
+}
+
+.instructionsContainer {
+    margin-top: 2px;
+    padding: 1px 2px;
+    width: 100%;
+    height: 25%;
+    border: 2px dashed white;
+}
+.start-modal-footer {
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 0.5em;
+    height: 25%;
+    font-size: 2em;
+}
+
+.startBtn {
+    background: rgb(43, 184, 240);
+    color: black;
+    padding: .4em .7em;
+    font-size: .7em;
+    border: 1px solid black;
+    border-radius: 50px;
+    border-style: 1px solid black;
+}
+
+.controlContainer {
+    position: absolute;
+    margin-left: -7px;
+    border: 2px solid white;
+    height: 75%;
+    width: 100%;
 }
