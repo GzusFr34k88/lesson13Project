@@ -4,7 +4,7 @@
 
 * [Instructions](#instructions)
 * [Download](#download)
-* [How To Play](#how to play)
+* [How To Play](#howToPlay)
 
 ## Instructions
 
