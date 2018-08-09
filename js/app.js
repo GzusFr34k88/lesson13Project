@@ -356,7 +356,8 @@ startBtn.addEventListener('click', function() {
     //enables keyboard and swipe input
     endStartOfGame = false;
     //starts the swipe event listener
-    detectswipe(directionalControl);
+    /* Disabled for potential plagerism 
+    detectswipe(directionalControl); */
 
     //possibly add character selection
 });
@@ -390,6 +391,7 @@ document.addEventListener('keyup', function(e) {
 });
 
 //Swipe detection provided by escapenetscape https://stackoverflow.com/users/2689455/escapenetscape
+/* Functionality disabled to avoid potential plagerism
 function detectswipe(func) {
     //if not at start or end of game, allows swipe input
     if (!endStartOfGame) {
@@ -435,4 +437,4 @@ function detectswipe(func) {
 //passes the swipe input to the player object
 function directionalControl(d) {
     player.handleInput(d);
-}
+} */
