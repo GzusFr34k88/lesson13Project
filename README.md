@@ -1,6 +1,20 @@
-frontend-nanodegree-arcade-game
-===============================
+# Arcade Game Project
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## Table of Contents
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+* [Instructions](#instructions)
+
+## Instructions
+
+### Download
+To download this game, click the green "Clone or download" button. From there you can use 
+``git clone https://github.com/GzusFr34k88/lesson13Project.git``
+or
+You can click "download ZIP"
+    If you download the zip folder, you'll have to unzip the folder. Then you can open the index.html file in your web browser to start playing
+### To Play:
+To play that game, use the arrow keys on the keyboard to move the character. If you are playing on a touch screen device, you can also swipe to move. Avoid hitting the bugs and don't touch the water. Hitting a bug or touching the water will make you lose a life (Sorry, you can't swim). You will start out with 5 lives. Each time you lose a life, you will lose 100 points. The yellow/orange gem is worth 100 points, the green gem is worth 75 points, and the blue gem is worth 25 points. The goal of the game is to get the highest scoe you can. At the end of the game, you should play again and try to beat your previous score. My highest so far is 2500 points. Try to beat me (Shouldn't be to hard). HAVE FUN!
+
+### Dependencies
+Google Coda Font
+Font Awesome library
