@@ -243,8 +243,6 @@ OrangeGem.prototype.reset = function () {
     let previousX = this.x;
     this.x = orangeSpawnX[Math.floor(Math.random() * 5)];
     while (this.x === previousX) {
-        console.log("PreviousX === this.x");
-        console.log(`${previousX} : ${this.x}`);
         this.x = orangeSpawnX[Math.floor(Math.random() * 5)];
     }
     this.y = orangeSpawnY;
@@ -267,8 +265,6 @@ GreenGem.prototype.reset = function () {
     let previousX = this.x;
     this.x = greenSpawnX[Math.floor(Math.random() * 5)];
     while (this.x === previousX) {
-        console.log("PreviousX === this.x");
-        console.log(`${previousX} : ${this.x}`);
         this.x = greenSpawnX[Math.floor(Math.random() * 5)];
     }
     this.y = greenSpawnY;
@@ -291,8 +287,6 @@ BlueGem.prototype.reset = function() {
     let previousX = this.x;
     this.x = blueSpawnX[Math.floor(Math.random() * 5)];
     while (this.x === previousX) {
-        console.log("PreviousX === this.x");
-        console.log(`${previousX} : ${this.x}`);
         this.x = blueSpawnX[Math.floor(Math.random() * 5)];
     }
     this.y = blueSpawnY;
