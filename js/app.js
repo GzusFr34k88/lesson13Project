@@ -240,7 +240,13 @@ OrangeGem.prototype.render = function() {
 
 //changes orange gems position
 OrangeGem.prototype.reset = function () {
+    let previousX = this.x;
     this.x = orangeSpawnX[Math.floor(Math.random() * 5)];
+    while (this.x === previousX) {
+        console.log("PreviousX === this.x");
+        console.log(`${previousX} : ${this.x}`);
+        this.x = orangeSpawnX[Math.floor(Math.random() * 5)];
+    }
     this.y = orangeSpawnY;
 };
 
@@ -258,7 +264,13 @@ GreenGem.prototype.render = function() {
 
 //changes green gems position
 GreenGem.prototype.reset = function () {
+    let previousX = this.x;
     this.x = greenSpawnX[Math.floor(Math.random() * 5)];
+    while (this.x === previousX) {
+        console.log("PreviousX === this.x");
+        console.log(`${previousX} : ${this.x}`);
+        this.x = greenSpawnX[Math.floor(Math.random() * 5)];
+    }
     this.y = greenSpawnY;
 };
 
@@ -276,7 +288,13 @@ BlueGem.prototype.render = function() {
 
 //change blue gems location
 BlueGem.prototype.reset = function() {
+    let previousX = this.x;
     this.x = blueSpawnX[Math.floor(Math.random() * 5)];
+    while (this.x === previousX) {
+        console.log("PreviousX === this.x");
+        console.log(`${previousX} : ${this.x}`);
+        this.x = blueSpawnX[Math.floor(Math.random() * 5)];
+    }
     this.y = blueSpawnY;
 };
 
